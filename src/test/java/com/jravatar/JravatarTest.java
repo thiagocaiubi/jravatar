@@ -64,14 +64,4 @@ public class JravatarTest {
 	public void testDownlaodFail() throws Exception {
 		assertNull("null for no gravatar by default", new Jravatar().download("doesntexist@example.com"));
 	}
-	
-	@Test
-	public void test() throws Exception {
-		String url = new Jravatar()
-			.withSecure()
-			.withSize(512)
-			.getUrl("thiago.caiubi@gmail.com");
-		System.out.println(url);
-		
-	}
 }
