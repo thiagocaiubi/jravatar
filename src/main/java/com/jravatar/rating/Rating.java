@@ -1,6 +1,6 @@
-package com.jravatar;
+package com.jravatar.rating;
 
-public enum GravatarRating {
+public enum Rating {
 
 	GENERAL_AUDIENCES("g"),
 
@@ -12,7 +12,7 @@ public enum GravatarRating {
 
 	private String code;
 
-	private GravatarRating(String code) {
+	private Rating(String code) {
 		this.code = code;
 	}
 
