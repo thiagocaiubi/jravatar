@@ -53,6 +53,11 @@ public class JravatarTest {
 			.getUrl("iHaveAn@email.com");
 		assertEquals("http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802.jpg?s=123&r=pg&d=identicon", url);
 	}
+
+	@Test
+	public void testForceDefault() throws Exception {
+		assertEquals("http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802.jpg?f=y", jravatar.forceDefault().getUrl("iHaveAn@email.com"));
+	}
 	
 	@Test
 	public void testGetImageUrlSecure() {

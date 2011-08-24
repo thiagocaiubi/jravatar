@@ -31,9 +31,15 @@ public final class Jravatar {
 	private Rating rating = DEFAULT_RATING;
 	private DefaultImage defaultImage = DEFAULT_IMAGE;
 	private String gravatarUrl = GRAVATAR_URL;
+	private String forceDefault;
 
 	public Jravatar withSecure() {
 		gravatarUrl = SECURE_GRAVATAR_URL;
+		return this;
+	}
+	
+	public Jravatar forceDefault() {
+		forceDefault = "y";
 		return this;
 	}
 	
@@ -84,11 +90,15 @@ public final class Jravatar {
 			params.add("r=" + rating.getCode());
 		if (defaultImage != DefaultImage.GRAVATAR_ICON)
 			params.add("d=" + defaultImage.getCode());
-
+		
 		if (params.isEmpty()) {
 			return "";
 		}
 		
+		if (forceDefault != null) {
+			params = new ArrayList<String>();
+			params.add("f=" + forceDefault);
+		}
 		return "?" + StringUtils.join(params.iterator(), "&");
 	}
 }
