@@ -5,11 +5,16 @@ public enum DefaultImage {
 	GRAVATAR_ICON(""),
 	
 	IDENTICON("identicon"),
+	
 	MONSTERID("monsterid"),
 	
 	WAVATAR("wavatar"),
 	
-	HTTP_404("404");
+	HTTP_404("404"),
+	
+	MISTERY_MAN("mm"),
+	
+	RETRO("retro");
 
 	private String code;
 
