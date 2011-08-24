@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 
 import com.jravatar.exception.JravatarDownloadException;
+import com.jravatar.image.DefaultImage;
 import com.jravatar.rating.Rating;
 
 public final class Jravatar {
@@ -24,11 +25,11 @@ public final class Jravatar {
 	
 	
 	private static final Rating DEFAULT_RATING = Rating.GENERAL_AUDIENCES;
-	private static final GravatarDefaultImage DEFAULT_IMAGE = GravatarDefaultImage.HTTP_404;
+	private static final DefaultImage DEFAULT_IMAGE = DefaultImage.HTTP_404;
 
 	private int size = IMAGE_DEFAULT_SIZE;
 	private Rating rating = DEFAULT_RATING;
-	private GravatarDefaultImage defaultImage = DEFAULT_IMAGE;
+	private DefaultImage defaultImage = DEFAULT_IMAGE;
 	private String gravatarUrl = GRAVATAR_URL;
 
 	public Jravatar withSecure() {
@@ -48,7 +49,7 @@ public final class Jravatar {
 		return this;
 	}
 
-	public Jravatar withDefaultImage(GravatarDefaultImage defaultImage) {
+	public Jravatar withDefaultImage(DefaultImage defaultImage) {
 		Validate.notNull(defaultImage, "defaultImage");
 		this.defaultImage = defaultImage;
 		return this;
@@ -81,7 +82,7 @@ public final class Jravatar {
 			params.add("s=" + size);
 		if (rating != DEFAULT_RATING)
 			params.add("r=" + rating.getCode());
-		if (defaultImage != GravatarDefaultImage.GRAVATAR_ICON)
+		if (defaultImage != DefaultImage.GRAVATAR_ICON)
 			params.add("d=" + defaultImage.getCode());
 
 		if (params.isEmpty()) {

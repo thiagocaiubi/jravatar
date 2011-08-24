@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.jravatar.exception.JravatarDownloadException;
+import com.jravatar.image.DefaultImage;
 import com.jravatar.rating.Rating;
 
 public class JravatarTest {
@@ -39,13 +40,13 @@ public class JravatarTest {
 
 	@Test
 	public void testGetImageUrlDefaultImage() {
-		jravatar.withDefaultImage(GravatarDefaultImage.IDENTICON);
+		jravatar.withDefaultImage(DefaultImage.IDENTICON);
 		assertEquals("http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802.jpg?d=identicon", jravatar.getUrl("iHaveAn@email.com"));
 	}
 
 	@Test
 	public void testGetImageUrlCombined() {
-		jravatar.withSize(123).withRating(Rating.PARENTAL_GUIDANCE_SUGGESTED).withDefaultImage(GravatarDefaultImage.IDENTICON);
+		jravatar.withSize(123).withRating(Rating.PARENTAL_GUIDANCE_SUGGESTED).withDefaultImage(DefaultImage.IDENTICON);
 		assertEquals("http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802.jpg?s=123&r=pg&d=identicon", jravatar.getUrl("iHaveAn@email.com"));
 	}
 	
