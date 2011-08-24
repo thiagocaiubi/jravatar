@@ -28,42 +28,45 @@ public class JravatarTest {
 
 	@Test
 	public void testGetImageUrlSize() {
-		jravatar.withSize(100);
-		assertEquals("http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802.jpg?s=100&d=404", jravatar.getUrl("iHaveAn@email.com"));
+		String url = jravatar.withSize(100).getUrl("iHaveAn@email.com");
+		assertEquals("http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802.jpg?s=100&d=404", url);
 	}
 
 	@Test
 	public void testGetImageUrlRating() {
-		jravatar.withRating(Rating.PARENTAL_GUIDANCE_SUGGESTED);
-		assertEquals("http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802.jpg?r=pg&d=404", jravatar.getUrl("iHaveAn@email.com"));
+		String url = jravatar.withRating(Rating.PARENTAL_GUIDANCE_SUGGESTED).getUrl("iHaveAn@email.com");
+		assertEquals("http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802.jpg?r=pg&d=404", url);
 	}
 
 	@Test
 	public void testGetImageUrlDefaultImage() {
-		jravatar.withDefaultImage(DefaultImage.IDENTICON);
-		assertEquals("http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802.jpg?d=identicon", jravatar.getUrl("iHaveAn@email.com"));
+		String url = jravatar.withDefaultImage(DefaultImage.IDENTICON).getUrl("iHaveAn@email.com");
+		assertEquals("http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802.jpg?d=identicon", url);
 	}
 
 	@Test
 	public void testGetImageUrlCombined() {
-		jravatar.withSize(123).withRating(Rating.PARENTAL_GUIDANCE_SUGGESTED).withDefaultImage(DefaultImage.IDENTICON);
-		assertEquals("http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802.jpg?s=123&r=pg&d=identicon", jravatar.getUrl("iHaveAn@email.com"));
+		String url = jravatar
+			.withSize(123)
+			.withRating(Rating.PARENTAL_GUIDANCE_SUGGESTED)
+			.withDefaultImage(DefaultImage.IDENTICON)
+			.getUrl("iHaveAn@email.com");
+		assertEquals("http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802.jpg?s=123&r=pg&d=identicon", url);
 	}
 	
 	@Test
 	public void testGetImageUrlSecure() {
-		jravatar.withSecure();
-		assertEquals("https://secure.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802.jpg?d=404", jravatar.getUrl("iHaveAn@email.com"));
+		assertEquals("https://secure.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802.jpg?d=404", jravatar.withSecure().getUrl("iHaveAn@email.com"));
 	}
 
 	@Test
 	public void testDownload() {
-		byte[] bytes = new Jravatar().download("info@ralfebert.de");
+		byte[] bytes = jravatar.download("info@ralfebert.de");
 		assertTrue("content present", bytes.length>100);
 	}
 	
 	@Test(expected=JravatarDownloadException.class)
 	public void testDownlaodFail() throws Exception {
-		assertNull("null for no gravatar by default", new Jravatar().download("doesntexist@example.com"));
+		assertNull("null for no gravatar by default", jravatar.download("doesntexist@example.com"));
 	}
 }
