@@ -7,6 +7,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.jravatar.exception.JravatarDownloadException;
+
 public class JravatarTest {
 
 	private Jravatar jravatar;
@@ -58,7 +60,7 @@ public class JravatarTest {
 		assertTrue("content present", bytes.length>100);
 	}
 	
-	@Test(expected=GravatarDownloadException.class)
+	@Test(expected=JravatarDownloadException.class)
 	public void testDownlaodFail() throws Exception {
 		assertNull("null for no gravatar by default", new Jravatar().download("doesntexist@example.com"));
 	}
