@@ -4,8 +4,9 @@
 	<artifactId>jravatar</artifactId>
 	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Jravatar Maven Webapp</name>
-	<url>http://maven.apache.org</url>
+	<name>Jravatar</name>
+	<description>Jravatar is a fluent Java library for accessing avatar images from gravatar.com</description>
+	<url>https://github.com/thiagocaiubi/jravatar</url>
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
