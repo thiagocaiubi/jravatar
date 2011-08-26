@@ -20,7 +20,7 @@ Jravatar is a fluent Java library for accessing avatar images from gravatar.com
 		.withDefaultImage(GravatarDefaultImage.IDENTICON)
 		.getUrl("iHaveAn@email.com");
 
-### Download imaeg
+### Download image
 
 	byte[] jpg = new Jravatar()
 		.withSize(50)
