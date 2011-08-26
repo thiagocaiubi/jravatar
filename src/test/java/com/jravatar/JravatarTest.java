@@ -60,6 +60,15 @@ public class JravatarTest {
 	}
 	
 	@Test
+	public void testForceDefaultCombined() throws Exception {
+		String url = jravatar
+			.withSize(512)
+			.forceDefault()
+			.getUrl("iHaveAn@email.com");
+		assertEquals("http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802.jpg?s=512&f=y", url);
+	}
+	
+	@Test
 	public void testGetImageUrlSecure() {
 		assertEquals("https://secure.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802.jpg", jravatar.withSecure().getUrl("iHaveAn@email.com"));
 	}

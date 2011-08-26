@@ -21,7 +21,6 @@ public final class Jravatar {
 	private final static String SECURE_GRAVATAR_URL = "https://secure.gravatar.com/avatar/";
 	
 	private String gravatarUrl = GRAVATAR_URL;
-	private String forceDefault;
 	
 	private List<String> parameters = new ArrayList<String>();
 	
@@ -75,11 +74,6 @@ public final class Jravatar {
 	private String formatUrlParameters() {
 		if (parameters.isEmpty()) {
 			return "";
-		}
-		
-		if (forceDefault != null) {
-			parameters = new ArrayList<String>();
-			parameters.add("f=" + forceDefault);
 		}
 		return "?" + StringUtils.join(parameters.iterator(), "&");
 	}
