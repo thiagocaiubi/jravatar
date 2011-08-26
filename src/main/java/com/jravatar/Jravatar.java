@@ -12,13 +12,11 @@ import org.apache.commons.lang.Validate;
 
 import com.jravatar.exception.JravatarDownloadException;
 import com.jravatar.image.DefaultImage;
+import com.jravatar.image.ImageSizeRange;
 import com.jravatar.rating.Rating;
 
 public final class Jravatar {
 
-	private static final int IMAGE_MIN_SIZE = 1;
-	private static final int IMAGE_MAX_SIZE = 512;
-	
 	private final static String GRAVATAR_URL = "http://www.gravatar.com/avatar/";
 	private final static String SECURE_GRAVATAR_URL = "https://secure.gravatar.com/avatar/";
 	
@@ -38,8 +36,7 @@ public final class Jravatar {
 	}
 	
 	public Jravatar withSize(int sizeInPixels) {
-		Validate.isTrue(sizeInPixels >= IMAGE_MIN_SIZE && sizeInPixels <= IMAGE_MAX_SIZE, "sizeInPixels needs to be between 1 and 512");
-		parameters.add("s="+ sizeInPixels);
+		parameters.add("s="+ new ImageSizeRange().ensureSizeIsInRange(sizeInPixels));
 		return this;
 	}
 
