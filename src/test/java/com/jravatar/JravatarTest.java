@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jravatar.exception.JravatarDownloadException;
+import com.jravatar.exception.DownloadException;
 import com.jravatar.image.DefaultImage;
 import com.jravatar.rating.Rating;
 
@@ -70,7 +70,7 @@ public class JravatarTest {
 		assertTrue("content present", bytes.length>100);
 	}
 	
-	@Test(expected=JravatarDownloadException.class)
+	@Test(expected=DownloadException.class)
 	public void testDownlaodFail() throws Exception {
 		jravatar.withDefaultImage(DefaultImage.HTTP_404);
 		assertNull("null for no gravatar by default", jravatar.download("doesntexist@example.com"));

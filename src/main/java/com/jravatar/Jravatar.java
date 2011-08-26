@@ -10,7 +10,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 
-import com.jravatar.exception.JravatarDownloadException;
+import com.jravatar.exception.DownloadException;
 import com.jravatar.image.DefaultImage;
 import com.jravatar.image.ImageSizeRange;
 import com.jravatar.rating.Rating;
@@ -59,14 +59,14 @@ public final class Jravatar {
 		return gravatarUrl + emailHash + ".jpg" + parameters;
 	}
 
-	public byte[] download(String email) throws JravatarDownloadException {
+	public byte[] download(String email) throws DownloadException {
 		InputStream stream = null;
 		try {
 			URL url = new URL(getUrl(email));
 			stream = url.openStream();
 			return IOUtils.toByteArray(stream);
 		} catch (Exception e) {
-			throw new JravatarDownloadException(e);
+			throw new DownloadException(e);
 		} finally {
 			IOUtils.closeQuietly(stream);
 		}
