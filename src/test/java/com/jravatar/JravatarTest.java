@@ -79,6 +79,5 @@ public class JravatarTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testNullRating() throws Exception {
 		jravatar.withRating(null).getUrl("iHaveAn@email.com");
-		
 	}
 }
