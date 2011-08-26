@@ -16,48 +16,42 @@ import com.jravatar.rating.Rating;
 
 public final class Jravatar {
 
-	private final static int IMAGE_DEFAULT_SIZE = 80;
 	private static final int IMAGE_MIN_SIZE = 1;
 	private static final int IMAGE_MAX_SIZE = 512;
 	
 	private final static String GRAVATAR_URL = "http://www.gravatar.com/avatar/";
 	private final static String SECURE_GRAVATAR_URL = "https://secure.gravatar.com/avatar/";
 	
-	
-	private static final Rating DEFAULT_RATING = Rating.GENERAL_AUDIENCES;
-	private static final DefaultImage DEFAULT_IMAGE = DefaultImage.HTTP_404;
-
-	private int size = IMAGE_DEFAULT_SIZE;
-	private Rating rating = DEFAULT_RATING;
-	private DefaultImage defaultImage = DEFAULT_IMAGE;
 	private String gravatarUrl = GRAVATAR_URL;
 	private String forceDefault;
-
+	
+	private List<String> parameters = new ArrayList<String>();
+	
 	public Jravatar withSecure() {
 		gravatarUrl = SECURE_GRAVATAR_URL;
 		return this;
 	}
 	
 	public Jravatar forceDefault() {
-		forceDefault = "y";
+		parameters.add("f=y");
 		return this;
 	}
 	
 	public Jravatar withSize(int sizeInPixels) {
 		Validate.isTrue(sizeInPixels >= IMAGE_MIN_SIZE && sizeInPixels <= IMAGE_MAX_SIZE, "sizeInPixels needs to be between 1 and 512");
-		this.size = sizeInPixels;
+		parameters.add("s="+ sizeInPixels);
 		return this;
 	}
 
 	public Jravatar withRating(Rating rating) {
 		Validate.notNull(rating, "rating");
-		this.rating = rating;
+		parameters.add("r="+ rating.getCode());
 		return this;
 	}
 
 	public Jravatar withDefaultImage(DefaultImage defaultImage) {
 		Validate.notNull(defaultImage, "defaultImage");
-		this.defaultImage = defaultImage;
+		parameters.add("d=" + defaultImage.getCode());
 		return this;
 	}
 
@@ -82,23 +76,14 @@ public final class Jravatar {
 	}
 
 	private String formatUrlParameters() {
-		List<String> params = new ArrayList<String>();
-
-		if (size != IMAGE_DEFAULT_SIZE)
-			params.add("s=" + size);
-		if (rating != DEFAULT_RATING)
-			params.add("r=" + rating.getCode());
-		if (defaultImage != DefaultImage.GRAVATAR_ICON)
-			params.add("d=" + defaultImage.getCode());
-		
-		if (params.isEmpty()) {
+		if (parameters.isEmpty()) {
 			return "";
 		}
 		
 		if (forceDefault != null) {
-			params = new ArrayList<String>();
-			params.add("f=" + forceDefault);
+			parameters = new ArrayList<String>();
+			parameters.add("f=" + forceDefault);
 		}
-		return "?" + StringUtils.join(params.iterator(), "&");
+		return "?" + StringUtils.join(parameters.iterator(), "&");
 	}
 }
