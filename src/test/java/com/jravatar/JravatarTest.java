@@ -75,4 +75,10 @@ public class JravatarTest {
 		jravatar.withDefaultImage(DefaultImage.HTTP_404);
 		assertNull("null for no gravatar by default", jravatar.download("doesntexist@example.com"));
 	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testNullRating() throws Exception {
+		jravatar.withRating(null).getUrl("iHaveAn@email.com");
+		
+	}
 }
